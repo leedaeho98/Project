@@ -3,12 +3,17 @@ package com.example.dateweb.service;
 import com.example.dateweb.entity.Member;
 import com.example.dateweb.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+//  회원가입에 대한  Service
 @Service
 @Transactional
-public class MemberService {
+public class MemberService implements UserDetailsService {
     @Autowired
     MemberRepository memberRepository;
 
@@ -25,5 +30,19 @@ public class MemberService {
         }
     }
 
+    // 로그인 할 유저의 email을 받아서 반환해주는 메서드
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Member member = memberRepository.findByEmail(email);
 
+        if (member == null){ // 로그인할 유저의 email이 없다면 던져라
+            throw new UsernameNotFoundException(email);
+        }
+
+        return User.builder() // User객체를 생성하기 위해서 생성자로 로그인 할 유저의 이메일과 비밀번호 권항을 파라미터로 넘겨준다
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
+    }
 }

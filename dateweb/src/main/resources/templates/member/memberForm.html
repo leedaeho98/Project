@@ -1,3 +1,4 @@
+<!-- 회원가입 페이지 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
@@ -23,17 +24,20 @@
             <p th:if="${#fields.hasErrors('password')}"
             th:errors="*{password}" class="fieldError">Incorrect Data</p>
         </div>
+
         <div class="form-group">
             <label th:for="phone">휴대전화</label>
             <input type="text" th:field="*{phone}" class="form-control" placeholder="휴대폰번호를 입력해주세요">
             <p th:if="${#fields.hasErrors('phone')}"
             th:errors="*{phone}" class="fieldError">Incorrect Data</p>
         </div>
+
         <div class="form-group">
             <label th:for="age">나이</label>
             <input type="text" th:field="*{age}" class="form-control" placeholder="나이를 입력해주세요">
             <p th:if="${#fields.hasErrors('age')}"
             th:errors="*{age}" class="fieldError">Incorrect Data</p>
+
         </div>
         <div class="form-group">
             <label th:for="gender">성별</label>

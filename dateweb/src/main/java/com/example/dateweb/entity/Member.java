@@ -4,9 +4,11 @@ import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.role.Role;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
+// 회원가입 테이블
 @Entity
 @Table(name = "member")
 @Getter @Setter
@@ -23,19 +25,19 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 16)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, unique = true)
     private String phone;
 
     @Column(nullable = false)
-    private Integer age;
+    private int age;
 
     @Column(nullable = false)
     private String gender;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true , length = 10)
     private String nickname;
 
     @Column(nullable = false)
@@ -44,7 +46,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Member createUser(MemberDto userDto){
+    public static Member createUser(MemberDto userDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setName(userDto.getName());
         member.setEmail(userDto.getEmail());
@@ -52,8 +54,8 @@ public class Member {
         member.setAge(userDto.getAge());
         member.setGender(userDto.getGender());
         member.setNickname(userDto.getNickname());
-        member.setAddress(userDto.getAddress());
-        member.setPassword(userDto.getPassword());
+        String password = passwordEncoder.encode(member.getPassword()); // 비밀번호를 암호화 시킨다
+        member.setPassword(password); // 암호화 시킨 번호를 저장한다
         member.setRole(Role.USER);
         return member;
     }

@@ -14,8 +14,9 @@ body{
     width: 100%;
     padding: 15px 0;
     text-align: center;
-    color: red;
+    color: blue;
 }
+
 .content{
     margin-bottom: 100px;
     margin-top: 50px;
