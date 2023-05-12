@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,18 +18,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberServiceTest {
     @Autowired
     MemberService memberService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public Member createMember(){
         MemberDto memberDto = new MemberDto();
         memberDto.setName("이대호");
         memberDto.setEmail("tlkj1633@naver.com");
-        memberDto.setPassword("1234");
+        memberDto.setPassword("123456789");
         memberDto.setPhone("010-8754-2340");
         memberDto.setAge(100);
-        memberDto.setGender("남");
+        memberDto.setGender("남자");
         memberDto.setNickname("레구어가");
         memberDto.setAddress("동탄");
-        return Member.createUser(memberDto);
+        return Member.createUser(memberDto, passwordEncoder);
     }
 
     @Test
@@ -51,7 +54,7 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("중복 회원 가입 테스트")
-    public void duplication(){
+    public void loginDuplication(){
         Member member1 = createMember();
         Member member2 = createMember();
         memberService.saveMember(member1);
@@ -61,7 +64,6 @@ class MemberServiceTest {
         });
 
         assertEquals("이미 가입된 회원입니다", e.getMessage());
-
 
     }
 

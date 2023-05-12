@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <div th:fragment="header">
@@ -12,20 +13,23 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/item/new">계정 조회</a>
-                    </li> <!--오류 시 aria 제거 원래 없앴어야 함-->
-                    <li class="list-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">데이터표</a>
+                    <li class="nav-item"
+                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a class="nav-link" href="/admin/memberList">계정 조회</a>
+                    </li>
+                    <li class="list-item dropdown"
+                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/admin/grape">데이터표</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">연령대 그래프</a>
-                            <a class="dropdown-item" href="#">시간대 그래프</a>
-                            <a class="dropdown-item" href="#">성별 그래프</a>
-                            <a class="dropdown-item" href="#">선호 MBTI 그래프</a>
+                            <a class="dropdown-item" href="/admin/grape/age">연령대 그래프</a>
+                            <a class="dropdown-item" href="/admin/grape/time">시간대 그래프</a>
+                            <a class="dropdown-item" href="/admin/grape/gender">성별 그래프</a>
+                            <a class="dropdown-item" href="/admin/grape/mbti">선호 MBTI 그래프</a>
                         </div>
+                    </li>
                 </ul>
-                    <a class="navbar" href="/members/login">로그인</a>
-                    <a class="navbar" href="/members/logout">로그아웃</a>
+                    <a class="navbar" sec:authorize="isAnonymous()" href="/members/login">로그인</a>
+                    <a class="navbar" sec:authorize="isAuthenticated()" href="/members/logout">로그아웃</a>
 
                 <!--                <form class="d-flex" role="search">-->
 <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->

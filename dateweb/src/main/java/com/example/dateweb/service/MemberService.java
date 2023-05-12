@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 //  회원가입에 대한  Service
 @Service
 @Transactional
+
 public class MemberService implements UserDetailsService {
     @Autowired
     MemberRepository memberRepository;

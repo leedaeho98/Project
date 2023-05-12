@@ -19,44 +19,41 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String phone;
 
     @Column(nullable = false)
     private int age;
 
-    @Column(nullable = false)
     private String gender;
 
-    @Column(nullable = false, unique = true , length = 10)
+    @Column(unique = true)
     private String nickname;
 
-    @Column(nullable = false)
     private String address;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Member createUser(MemberDto userDto, PasswordEncoder passwordEncoder){
+    public static Member createUser(MemberDto memberDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
-        member.setName(userDto.getName());
-        member.setEmail(userDto.getEmail());
-        member.setPhone(userDto.getPhone());
-        member.setAge(userDto.getAge());
-        member.setGender(userDto.getGender());
-        member.setNickname(userDto.getNickname());
-        String password = passwordEncoder.encode(member.getPassword()); // 비밀번호를 암호화 시킨다
+        member.setName(memberDto.getName());
+        member.setEmail(memberDto.getEmail());
+        member.setPhone(memberDto.getPhone());
+        member.setAge(memberDto.getAge());
+        member.setGender(memberDto.getGender());
+        member.setNickname(memberDto.getNickname());
+        member.setAddress(memberDto.getAddress());
+        String password = passwordEncoder.encode(memberDto.getPassword()); // 비밀번호를 암호화 시킨다
         member.setPassword(password); // 암호화 시킨 번호를 저장한다
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
 }
