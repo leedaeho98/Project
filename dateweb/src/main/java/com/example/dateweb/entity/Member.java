@@ -53,7 +53,7 @@ public class Member {
         member.setAddress(memberDto.getAddress());
         String password = passwordEncoder.encode(memberDto.getPassword()); // 비밀번호를 암호화 시킨다
         member.setPassword(password); // 암호화 시킨 번호를 저장한다
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.USER); // 권한설정
         return member;
     }
 }

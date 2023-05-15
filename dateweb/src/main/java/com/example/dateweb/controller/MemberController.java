@@ -10,12 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
-@RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -23,7 +22,7 @@ public class MemberController {
     private final PasswordEncoder passwordEncoder;
 
     // 회원가입 페이지 컨트룰러
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/members/new")
     public String memberForm(Model model){
         model.addAttribute("memberDto",new MemberDto());
         return "member/memberForm";
@@ -31,7 +30,7 @@ public class MemberController {
 
 
     // 회원가입 성공했을떄 응답
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/members/new")
     public String afterMember(@Valid MemberDto memberDto, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){ // 검사 후 결과는 bidningResult에 담는다 , 에러가 있으면 회원 가입페이지로 이동
             return "member/memberForm";
@@ -48,15 +47,23 @@ public class MemberController {
     }
 
     // 로그인 페이지 컨트룰러
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/members/login")
     public String memberLoginForm(){
         return "member/memberLoginForm";
     }
 
     // 로그인 실패했을때
-    @GetMapping(value = "/login/error")
+    @GetMapping(value = "/members/login/error")
     public String loginError(Model model){
         model.addAttribute("errorMessage","아이디 또는 비밀번호를 확인해주세요");
         return "member/memberLoginForm";
     }
+
+    @GetMapping(value = "/admin/memberlist")
+    public String memberListForm(Model model){
+        List<Member> memberList = memberService.findAll();
+        model.addAttribute("memberList",memberList);
+        return "member/memberList";
+    }
+
 }

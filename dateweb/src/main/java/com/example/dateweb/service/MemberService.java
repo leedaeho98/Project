@@ -1,5 +1,6 @@
 package com.example.dateweb.service;
 
+import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.entity.Member;
 import com.example.dateweb.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //  회원가입에 대한  Service
 @Service
@@ -21,7 +25,6 @@ public class MemberService implements UserDetailsService {
     public Member saveMember(Member member){
         duplication(member);
         return memberRepository.save(member);
-
     }
 
     private void duplication(Member member){
@@ -30,6 +33,7 @@ public class MemberService implements UserDetailsService {
             throw new IllegalStateException("이미 가입된 회원입니다");
         }
     }
+
 
     // 로그인 할 유저의 email을 받아서 반환해주는 메서드
     @Override
@@ -46,4 +50,9 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
+
+    public List<Member> findAll(){
+        List<Member> memberList = memberRepository.findAll();
+        return memberList;
+        }
 }
