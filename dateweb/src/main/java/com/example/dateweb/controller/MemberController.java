@@ -8,8 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -59,11 +58,19 @@ public class MemberController {
         return "member/memberLoginForm";
     }
 
+    // 회원 조회 컨트룰러
     @GetMapping(value = "/admin/memberlist")
     public String memberListForm(Model model){
-        List<Member> memberList = memberService.findAll();
-        model.addAttribute("memberList",memberList);
+        List<Member> members = memberService.selectAll();
+        model.addAttribute("members",members);
         return "member/memberList";
     }
+
+    @GetMapping(value = "/admin/delete")
+    public String delete(Long id){
+        memberService.deleteUser(id);
+        return "redirect:/member/memberList";
+    }
+
 
 }

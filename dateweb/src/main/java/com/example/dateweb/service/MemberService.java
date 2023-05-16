@@ -51,8 +51,15 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
-    public List<Member> findAll(){
+    // 전체 회원 조회
+    public List<Member> selectAll(){
         List<Member> memberList = memberRepository.findAll();
         return memberList;
-        }
+    }
+
+    // 회원 삭제
+    public void deleteUser(Long id){
+        memberRepository.deleteById(id);
+    }
+
 }
