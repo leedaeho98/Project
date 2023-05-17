@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class MemberController {
     @GetMapping(value = "/members/new")
     public String memberForm(Model model){
         model.addAttribute("memberDto",new MemberDto());
-        return "member/memberForm";
+        return "/member/memberForm";
     }
 
 
@@ -69,8 +70,25 @@ public class MemberController {
     @GetMapping(value = "/admin/delete")
     public String delete(Long id){
         memberService.deleteUser(id);
-        return "redirect:/member/memberList";
+        return "redirect:/admin/memberlist";
     }
+
+    @GetMapping(value = "/admin/modify")
+    public String update(Model model, Long id){
+        Optional<Member> members = memberService.selectUser(id);
+        model.addAttribute("members", members);
+        return "member/membermodify";
+    }
+
+    @PostMapping(value = "/admin/modify")
+    public String updatePost(Member member){
+        memberService.updateUser(member);
+        return "redirect:/admin/memberlist";
+    }
+
+
+
+
 
 
 }

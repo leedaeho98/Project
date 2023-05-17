@@ -12,7 +12,6 @@
 <table border="1">
     <thead>
         <tr>
-            <td>회원번호</td>
             <td>이름</td>
             <td>이메일</td>
             <td>휴대전화</td>
@@ -26,7 +25,6 @@
     </thead>
     <tbody>
         <tr th:each="member:${members}">
-            <td th:text="${member.id}"></td>
             <td th:text="${member.name}"></td>
             <td th:text="${member.email}"></td>
             <td th:text="${member.phone}"></td>

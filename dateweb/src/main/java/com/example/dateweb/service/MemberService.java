@@ -1,6 +1,5 @@
 package com.example.dateweb.service;
 
-import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.entity.Member;
 import com.example.dateweb.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 //  회원가입에 대한  Service
 @Service
@@ -57,9 +56,18 @@ public class MemberService implements UserDetailsService {
         return memberList;
     }
 
+    public Optional<Member> selectUser(Long id){
+       return memberRepository.findById(id);
+    }
+
     // 회원 삭제
     public void deleteUser(Long id){
         memberRepository.deleteById(id);
+
     }
+    public void updateUser(Member member){
+      memberRepository.save(member);
+    }
+
 
 }

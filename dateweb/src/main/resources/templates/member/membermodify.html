@@ -1,0 +1,53 @@
+<!-- 회원 조회 html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+  <h3>회원수정</h3>
+  <a th:href="@{#}">회원등록</a>
+
+  <form action="/admin/modify" method="post">
+    <table border="1">
+      <tr>
+        <td>이름</td>
+        <input type="text" name="name" th:value="${member.name}">
+      </tr>
+      <tr>
+        <td>이메일</td>s
+        <input type="email" name="email" th:value="${member.email}" readonly="readonly">
+      </tr>
+      <tr>
+        <td>휴대전화</td>
+        <input type="text" name="phone" th:value="${member.phone}">
+      </tr>
+      <tr>
+        <td>나이</td>
+        <input type="text" name="age" th:value="${member.age}">
+      </tr>
+      <tr>
+        <td>성별</td>
+        <input type="text" name="gender" th:value="${member.gender}">
+      </tr>
+      <tr>
+        <td>닉네임</td>
+        <input type="text" name="nickname" th:value="${member.nickname}">
+      </tr>
+      <tr>
+        <td>주소</td>
+        <input type="text" name="address" th:value="${member.address}">
+      </tr>
+      <tr>
+        <td>권한</td>
+        <input type="text" name="role" th:value="${member.role}">
+
+      </tr>
+      <tr>
+        <td colspan="2" align="right" typeof="submit">수정</td>
+      </tr>
+    </table>
+  </form>
+</div>
+</html>
