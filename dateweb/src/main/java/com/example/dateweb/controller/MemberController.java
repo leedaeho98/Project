@@ -74,9 +74,9 @@ public class MemberController {
     }
 
     @GetMapping(value = "/admin/modify")
-    public String update(Model model, Long id){
-        Optional<Member> members = memberService.selectUser(id);
-        model.addAttribute("members", members);
+    public String updateForm(Model model, Long id){
+        Member member = memberService.selectUser(id);
+        model.addAttribute("member", member);
         return "member/membermodify";
     }
 
@@ -85,10 +85,6 @@ public class MemberController {
         memberService.updateUser(member);
         return "redirect:/admin/memberlist";
     }
-
-
-
-
 
 
 }

@@ -56,17 +56,20 @@ public class MemberService implements UserDetailsService {
         return memberList;
     }
 
-    public Optional<Member> selectUser(Long id){
-       return memberRepository.findById(id);
+    // id로 회원 조회
+    public Member selectUser(Long id){
+        Member member = memberRepository.findById(id).get();
+        return member;
+    }
+
+    // 회원 수정
+    public void updateUser(Member member){
+        memberRepository.save(member);
     }
 
     // 회원 삭제
     public void deleteUser(Long id){
         memberRepository.deleteById(id);
-
-    }
-    public void updateUser(Member member){
-      memberRepository.save(member);
     }
 
 

@@ -1,53 +1,48 @@
-<!-- 회원 조회 html -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{layouts/layout1}">
 
+
 <div layout:fragment="content">
   <h3>회원수정</h3>
-  <a th:href="@{#}">회원등록</a>
+  <a th:href="@{/admin/memberlist}">회원목록</a>
 
   <form action="/admin/modify" method="post">
-    <table border="1">
+    <table border="1" th:each="m:${member}">
       <tr>
         <td>이름</td>
-        <input type="text" name="name" th:value="${member.name}">
+        <td><input type="text" name="name" th:value="${m.name}"></td>
       </tr>
       <tr>
-        <td>이메일</td>s
-        <input type="email" name="email" th:value="${member.email}" readonly="readonly">
+        <td>이메일</td>
+        <td><input type="email" name="email" th:value="${m.email}" readonly="readonly"></td>
       </tr>
       <tr>
         <td>휴대전화</td>
-        <input type="text" name="phone" th:value="${member.phone}">
+        <td><input type="text" name="phone" th:value="${m.phone}"></td>
       </tr>
       <tr>
         <td>나이</td>
-        <input type="text" name="age" th:value="${member.age}">
+        <td><input type="text" name="age" th:value="${m.age}"></td>
       </tr>
       <tr>
         <td>성별</td>
-        <input type="text" name="gender" th:value="${member.gender}">
+        <td><input type="text" name="gender" th:value="${m.gender}"></td>
       </tr>
       <tr>
         <td>닉네임</td>
-        <input type="text" name="nickname" th:value="${member.nickname}">
+        <td><input type="text" name="nickname" th:value="${m.nickname}"></td>
       </tr>
       <tr>
         <td>주소</td>
-        <input type="text" name="address" th:value="${member.address}">
+        <td><input type="text" name="address" th:value="${m.address}"></td>
       </tr>
       <tr>
-        <td>권한</td>
-        <input type="text" name="role" th:value="${member.role}">
-
-      </tr>
-      <tr>
-        <td colspan="2" align="right" typeof="submit">수정</td>
+        <td colspan="2" align="center"><input type="submit" value="수정"></td>
       </tr>
     </table>
   </form>
 </div>
+
 </html>

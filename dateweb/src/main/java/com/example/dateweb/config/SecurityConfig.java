@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout")) // 로그아웃 URL 설정
                 .logoutSuccessUrl("/"); // 로그아웃 성공 시 이동할 URL 설정
 
+
         http.authorizeRequests()
                 .mvcMatchers("/","/members/**").permitAll() // .permitAll()을 통해 모든 사용자가 해당 경로에 접근 가능
                 .mvcMatchers("/admin/**").hasRole("ADMIN") // ADMIN 계정일경우에만 접근가능
