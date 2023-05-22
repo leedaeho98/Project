@@ -80,11 +80,12 @@ public class MemberController {
         return "member/membermodify";
     }
 
-    @PostMapping(value = "/admin/modify")
-    public String updatePost(Member member){
-        memberService.updateUser(member);
-        return "redirect:/admin/memberlist";
+        @PostMapping(value = "/admin/modify")
+        public String updatePost(Member member) {
+
+            memberService.updateUser(member);
+
+            return "redirect:/admin/memberlist";
+        }
+
     }
-
-
-}

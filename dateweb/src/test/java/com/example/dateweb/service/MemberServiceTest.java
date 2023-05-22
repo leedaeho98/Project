@@ -2,23 +2,16 @@ package com.example.dateweb.service;
 
 import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.entity.Member;
-import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,8 +25,6 @@ class MemberServiceTest {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    MockMvc mockMvc;
 
     public Member createMember(){
         MemberDto memberDto = new MemberDto();
@@ -87,6 +78,7 @@ class MemberServiceTest {
         Member member = createMember();
         member.setGender("여자");
         member.setAddress("안녕하세요");
-            memberService.updateUser(member);
+        memberService.updateUser(member);
+
         };
 }

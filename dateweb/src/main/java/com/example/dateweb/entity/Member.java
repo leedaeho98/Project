@@ -42,6 +42,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column
+
+
+
     public static Member createUser(MemberDto memberDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setName(memberDto.getName());
