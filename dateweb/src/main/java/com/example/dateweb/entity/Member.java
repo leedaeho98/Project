@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 @Getter @Setter
-public class Member {
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,12 +39,11 @@ public class Member {
 
     private String address;
 
+    @OneToMany(mappedBy = "member" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY) // 한명의 회원은 여러개의 사진을 담을 수 있다
+    private MemberImg memberImg;
+
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @Column
-
-
 
     public static Member createUser(MemberDto memberDto, PasswordEncoder passwordEncoder){
         Member member = new Member();

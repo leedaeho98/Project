@@ -14,6 +14,12 @@ public class MemberImg {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "item_img_id")
     private Long id;
+
+    private String imgUrl; // 이미지를 가져올 주소
+
+    @ManyToOne // 여러개의 사진은 한명의 회원에 추가할수있다
+    @JoinColumn(name = "member_id")
+    private Member member;
     
 
 
