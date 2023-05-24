@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 
 // 회원가입 테이블
 @Entity
@@ -39,8 +40,6 @@ public class Member extends BaseEntity{
 
     private String address;
 
-    @OneToMany(mappedBy = "member" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY) // 한명의 회원은 여러개의 사진을 담을 수 있다
-    private MemberImg memberImg;
 
     @Enumerated(EnumType.STRING)
     private Role role;

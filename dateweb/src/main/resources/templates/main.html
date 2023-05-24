@@ -1,9 +1,31 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
       layout:decorate="~{layouts/layout1}">
 
+<th:block layout:fragment="css">
+  <style>
+
+    .border border-primary {
+      width:300px;
+      height:300px;
+    }
+
+    button {
+      margin : 2em;
+      width:300px;
+      height:300px;
+      font-size:xx-large;
+    }
+
+  </style>
+
+</th:block>
+
+
 <div layout:fragment="content">
-  <h1>메인페이지입니다</h1>
-</div>z
+  <div class="border border-primary">
+    <button class="btn btn-primary" type="button" onclick="location.href='/members/login'">로그인</button>
+    <button class="btn btn-success" type="button" onclick="location.href='/members/new'">회원가입</button>
+  </div>
+</div>
