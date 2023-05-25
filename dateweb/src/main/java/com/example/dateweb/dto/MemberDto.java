@@ -23,7 +23,7 @@ public class MemberDto {
     @NotEmpty(message = "")
     private String password;
 
-    @Length(min = 10, max = 10 , message = "전화번호는 10자이하로 적어주세요")
+    @Length(min = 11, max = 11 , message = "휴대전화는 10자이하로 적어주세요")
     @NotBlank(message = "")
     private String phone;
 

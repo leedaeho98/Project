@@ -4,7 +4,7 @@
 
 
 <div th:fragment="header">
-    <nav class="navbar navbar-expand-sm bg-white navbar-aqua">
+    <nav class="navbar navbar-expand-sm bg-white navbar-aqua" >
         <div class="container-fluid">
             <a class="navbar-brand" style="text-align:center" href="/">TPA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +27,9 @@
                             <a class="dropdown-item" href="/admin/grape/mbti">선호 MBTI 그래프</a>
                         </div>
                     </li>
-                </ul>
-                    <a class="navbar" sec:authorize="isAnonymous()" href="/members/login">로그인</a>
-                    <a class="navbar" sec:authorize="isAuthenticated()" href="/members/logout">로그아웃</a>
 
+                </ul>
+                <a class="navbar" sec:authorize="isAuthenticated()" href="/members/logout">로그아웃</a>
                 <!--                <form class="d-flex" role="search">-->
 <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
 <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
