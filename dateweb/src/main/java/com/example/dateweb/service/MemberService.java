@@ -1,5 +1,6 @@
 package com.example.dateweb.service;
 
+import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.entity.Member;
 import com.example.dateweb.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 //  회원가입에 대한  Service

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 @Getter @Setter
-public class Member extends BaseEntity{
+public class Member extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
