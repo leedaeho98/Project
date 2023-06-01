@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+
+<div layout:fragment="content">
+  <h3>회원수정</h3>
+  <a th:href="@{/admin/memberlist}">회원목록</a>
+
+  <form action="/admin/modify" method="post">
+    <table border="1" th:each="m:${member}">
+      <tr>
+        <td>이름</td>
+        <td><input type="text" name="name" th:value="${m.name}"></td>
+      </tr>
+      <tr>
+        <td>이메일</td>
+        <td><input type="email" name="email" th:value="${m.email}"></td>
+      </tr>
+      <tr>
+        <td>휴대전화</td>
+        <td><input type="text" name="phone" th:value="${m.phone}"></td>
+      </tr>
+      <tr>
+        <td>나이</td>
+        <td><input type="text" name="age" th:value="${m.age}"></td>
+      </tr>
+      <tr>
+        <td>성별</td>
+        <td><input type="text" name="gender" th:value="${m.gender}"></td>
+      </tr>
+      <tr>
+        <td>닉네임</td>
+        <td><input type="text" name="nickname" th:value="${m.nickname}"></td>
+      </tr>
+      <tr>
+        <td>주소</td>
+        <td><input type="text" name="address" th:value="${m.address}"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center"><button type="submit" class="btn btn-primary">수정하기</button></td>
+      </tr>
+    </table>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  </form>
+</div>
+
+</html>

@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -58,35 +57,4 @@ public class MemberController {
         return "member/memberLoginForm";
     }
 
-    // 회원 조회 메서드
-    @GetMapping(value = "/admin/memberlist")
-    public String memberListForm(Model model){
-        List<Member> members = memberService.selectAll();
-        model.addAttribute("members",members);
-        return "member/memberList";
-    }
-
-    // 회원 삭제 메서드
-    @GetMapping(value = "/admin/delete")
-    public String delete(Long id){
-        memberService.deleteUser(id);
-        return "redirect:/admin/memberlist";
-    }
-
-    // 회원 수정 메서드
-    @GetMapping(value = "/admin/modify")
-    public String updateForm(Model model, Long id){
-        Member member = memberService.selectUser(id);
-        model.addAttribute("member", member);
-        return "member/membermodify";
-    }
-
-        @PostMapping(value = "/admin/modify")
-        public String updatePost(Member member) {
-
-            memberService.updateUser(member);
-
-            return "redirect:/admin/memberlist";
-        }
-
-    }
+}

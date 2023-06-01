@@ -1,14 +1,13 @@
 package com.example.dateweb.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
+@Data
 public class MemberImgDto {
 
     private Long id;
 
-    private String memberImgName;
+    private String imgName;
 
-    private String memberImgUrl;
+    private String imgUrl;
 }

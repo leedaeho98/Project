@@ -34,6 +34,8 @@ public class MemberDto {
     @NotEmpty(message = "성별은 필수 입력 값입니다")
     private String gender;
 
+    private String  image;
+
     @Pattern(regexp = "[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다")
     @NotBlank(message = "")
     private String nickname;
