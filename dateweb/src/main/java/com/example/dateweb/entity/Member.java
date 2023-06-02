@@ -39,6 +39,9 @@ public class Member extends BaseTimeEntity{
 
     private String address;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private MemberImg memberImg;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

@@ -1,7 +1,7 @@
 package com.example.dateweb.controller;
 
 import com.example.dateweb.entity.Member;
-import com.example.dateweb.service.MemberService;
+import com.example.dateweb.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+// 관리자 권한 회원 정보 수정 및 삭제 컨트룰러
+
 @Controller
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final MemberService memberService;
+    private final AdminService memberService;
 
     // 회원 조회 메서드
     @GetMapping(value = "/admin/memberlist")

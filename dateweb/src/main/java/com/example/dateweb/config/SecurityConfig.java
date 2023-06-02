@@ -1,7 +1,7 @@
 package com.example.dateweb.config;
 
-import com.example.dateweb.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.dateweb.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,10 +15,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    MemberService memberService;
+    private final AuthService authService;
 
     // 로그인 시 권한으로 인한 재역과 경로 설정
     @Override
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService)
+        auth.userDetailsService(authService)
                 .passwordEncoder(passwordEncoder());
     }
 

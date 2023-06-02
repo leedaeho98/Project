@@ -1,23 +1,25 @@
 package com.example.dateweb.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
-@Entity // 데이터베이스 테이블 생성
-@Table(name = "member_img") // 테이블 이름
+@Entity
+@Table(name = "member_img")
+@Getter @Setter
 public class MemberImg {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "memberImg_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // 식별값
 
-    private String memberImgName; // 이미지 이름
+    private String imgName; // 이미지명
 
-    private String memberImgUrl; // 이미지 경로
+    private String imgUrl; // 이미지경로
 
-    @ManyToOne(fetch = FetchType.LAZY) // 지연로딩
+    @ManyToOne // 여러사진이 하나의 회원에 담긴다
     @JoinColumn(name = "member_id")
     private Member member;
-
 
 }

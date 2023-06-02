@@ -20,7 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestPropertySource(locations = "classpath:application-test.properties")
 class MemberServiceTest {
     @Autowired
-    MemberService memberService;
+    AuthService authService;
+
+    @Autowired
+    AdminService adminService;
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -43,7 +47,7 @@ class MemberServiceTest {
     @DisplayName("회원가입 테스트")
     public void saveMemberTest(){
         Member member = createMember();
-        Member savedMember = memberService.saveMember(member);
+        Member savedMember = authService.saveMember(member);
 
         assertEquals(member.getName(), savedMember.getName());
         assertEquals(member.getEmail(), savedMember.getEmail());
@@ -62,10 +66,10 @@ class MemberServiceTest {
     public void loginDuplication(){
         Member member1 = createMember();
         Member member2 = createMember();
-        memberService.saveMember(member1);
+        authService.saveMember(member1);
 
         Throwable e = assertThrows(IllegalStateException.class, () -> {
-            memberService.saveMember(member2);
+            authService.saveMember(member2);
         });
 
         assertEquals("이미 가입된 회원입니다", e.getMessage());
@@ -77,7 +81,7 @@ class MemberServiceTest {
         Member member = createMember();
         member.setGender("여자");
         member.setAddress("안녕하세요");
-        memberService.updateUser(member);
+        adminService.updateUser(member);
 
         };
 }
