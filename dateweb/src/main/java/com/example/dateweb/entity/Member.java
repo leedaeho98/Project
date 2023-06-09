@@ -4,20 +4,24 @@ import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.role.Role;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 // 회원가입 테이블
 @Entity
 @Table(name = "member")
 @Getter @Setter
-public class Member extends BaseTimeEntity{
+public class Member extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "member_id")
     private Long id;
+
+    private String displayId;
 
     private String name;
 
@@ -39,8 +43,6 @@ public class Member extends BaseTimeEntity{
 
     private String address;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private MemberImg memberImg;
 
     @Enumerated(EnumType.STRING)
     private Role role;

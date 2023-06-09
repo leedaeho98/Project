@@ -16,12 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final AdminService memberService;
+    private final AdminService adminService;
 
     // 회원 조회 메서드
     @GetMapping(value = "/admin/memberlist")
     public String memberListForm(Model model){
-        List<Member> members = memberService.selectAll();
+        List<Member> members = adminService.selectAll();
         model.addAttribute("members",members);
         return "admin/memberList";
     }
@@ -29,14 +29,14 @@ public class AdminController {
     // 회원 삭제 메서드
     @GetMapping(value = "/admin/delete")
     public String delete(Long id){
-        memberService.deleteUser(id);
+        adminService.deleteUser(id);
         return "redirect:/admin/memberlist";
     }
 
     // 회원 수정 메서드
     @GetMapping(value = "/admin/modify")
     public String updateForm(Model model, Long id){
-        Member member = memberService.selectUser(id);
+        Member member = adminService.selectUser(id);
         model.addAttribute("member", member);
         return "admin/membermodify";
     }
@@ -44,7 +44,7 @@ public class AdminController {
     @PostMapping(value = "/admin/modify")
     public String updatePost(Member member) {
 
-        memberService.updateUser(member);
+        adminService.updateUser(member);
 
         return "redirect:/admin/memberlist";
     }
