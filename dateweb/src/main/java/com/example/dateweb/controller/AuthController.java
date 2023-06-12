@@ -16,13 +16,14 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/members")
 public class AuthController {
 
     private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
 
     // 회원가입 페이지 컨트룰러
-    @GetMapping(value = "/members/new")
+    @GetMapping(value = "/new")
     public String memberForm(Model model){
         model.addAttribute("memberDto",new MemberDto());
         return "/auth/memberForm";
@@ -30,14 +31,14 @@ public class AuthController {
 
 
     // 회원가입 성공했을떄 응답
-    @PostMapping(value = "/members/new")
+    @PostMapping(value = "/new")
     public String afterMember(@Valid MemberDto memberDto, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()){ // 검사 후 결과는 bidningResult에 담는다 , 에러가 있으면 회원 가입페이지로 이동
             return "auth/memberForm";
         }
         try {
             Member member = Member.createUser(memberDto, passwordEncoder);
-            authService.saveMember(member);
+            authService.saveMember(member );
         }catch(IllegalStateException e){
             model.addAttribute("errorMessage" ,e.getMessage()); // 회원 가입 시 중복 회원 가입 예외가 발생하면 에러메시지를 뷰로 전달
             return "auth/memberForm";
@@ -47,13 +48,13 @@ public class AuthController {
     }
 
     // 로그인 페이지 컨트룰러
-    @GetMapping(value = "/members/login")
+    @GetMapping(value = "/login")
     public String memberLoginForm(){
         return "auth/memberLoginForm";
     }
 
     // 로그인 실패했을때
-    @GetMapping(value = "/members/login/error")
+    @GetMapping(value = "/login/error")
     public String loginError(Model model){
         model.addAttribute("errorMessage","아이디 또는 비밀번호를 확인해주세요");
         return "auth/memberLoginForm";

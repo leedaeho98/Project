@@ -1,7 +1,11 @@
 package com.example.dateweb.service;
 
+import com.example.dateweb.dto.MemberDto;
 import com.example.dateweb.entity.Member;
+import com.example.dateweb.entity.MemberImg;
+import com.example.dateweb.repository.MemberImgRepository;
 import com.example.dateweb.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,17 +13,34 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class AuthService implements UserDetailsService {
 
-    @Autowired
-    MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+    private final MemberImgRepository memberImgRepository;
+    private final MemberImgService memberImgService;
 
-    public Member saveMember(Member member){
-        duplication(member);
-        return memberRepository.save(member);
+    public Long saveMember(MemberDto memberDto, List<MultipartFile> memberImgFileList) throws Exception {
+        Member member = memberDto.createMember();
+        duplication(member); // 중복 회원 검사
+        memberRepository.save(member);
+
+        for (int i=0; i<memberImgFileList.size(); i++ ){
+            MemberImg memberImg = new MemberImg();
+            memberImg.setMember(member);
+            if(i == 0)
+                memberImg.setRepImg("Y");
+            else
+                memberImg.setRepImg("N");
+            memberImgService.saveMemberImg(memberImg, memberImgFileList.get(i));
+        }
+        return member.getId();
     }
 
     private void duplication(Member member){
