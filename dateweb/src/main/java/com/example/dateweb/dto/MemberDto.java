@@ -38,9 +38,6 @@ public class MemberDto {
     @NotEmpty(message = "성별은 필수 입력 값입니다")
     private String gender;
 
-    private List<MemberImgDto> memberImgDtoList = new ArrayList<>(); // 멤버 저장 후 수정할 때 멤버 이미지 정보를 저장하는 리스트
-
-    private List<Long> itemImgIds = new ArrayList<>(); // 멤버의 이미지 아이디를 저장하는 리스트, 수정 시에 이미지 아이디를 담아둘 용도
 
     @Pattern(regexp = "[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다")
     @NotBlank(message = "")
@@ -51,12 +48,6 @@ public class MemberDto {
 
     private static ModelMapper modelMapper = new ModelMapper();
 
-    public Member createMember(){
-        return modelMapper.map(this, Member.class);
-    }
 
-    public static MemberDto of(Member member){
-        return modelMapper.map(member,MemberDto.class);
-    }
 
 }

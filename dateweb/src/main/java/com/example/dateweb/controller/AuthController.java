@@ -38,12 +38,13 @@ public class AuthController {
         }
         try {
             Member member = Member.createUser(memberDto, passwordEncoder);
-            authService.saveMember(member );
+            authService.saveMember(member);
+
         }catch(IllegalStateException e){
             model.addAttribute("errorMessage" ,e.getMessage()); // 회원 가입 시 중복 회원 가입 예외가 발생하면 에러메시지를 뷰로 전달
             return "auth/memberForm";
         }
-        
+
         return "redirect:/";
     }
 
